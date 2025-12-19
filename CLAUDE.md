@@ -7,14 +7,15 @@
 
 ## Mevcut Dersler
 - [x] 1. Ders - Unity Nedir ve Kurulumu Adımları (tamamlandı)
+- [x] 2. Ders - Unity ile Bilinmesi Gerekenler (tamamlandı)
 
 ## Sıradaki Dersler (Öneriler)
-- [ ] 2. Ders - Unity Arayüzü ve Temel Paneller
-- [ ] 3. Ders - GameObject ve Component Kavramları
-- [ ] 4. Ders - İlk Sahne Oluşturma
+- [ ] 3. Ders - Unity Arayüzü Detaylı İnceleme ve İlk Sahne
+- [ ] 4. Ders - GameObject ve Component Kavramları
 - [ ] 5. Ders - C# Scripting Temelleri
 
 ## Son Yapılan İşlemler
+- 2. Ders eklendi: Unity ile Bilinmesi Gerekenler (Editor, Asset, Visual Studio)
 - Git repo oluşturuldu ve GitHub'a bağlandı
 - README.md dosyaları eklendi
 - .gitignore dosyası eklendi
