@@ -27,3 +27,4 @@ Unity, 2D ve 3D oyunlar, simülasyonlar ve interaktif deneyimler geliştirmek i�
 
 - Kurulum sırasında gerekli modülleri seçmeyi unutmayın (Android, iOS, WebGL vb.)
 - Visual Studio veya VS Code entegrasyonu için gerekli bileşenleri kurun
+
