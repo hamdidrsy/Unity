@@ -114,3 +114,4 @@ ProjectSettings/  → Proje ayarları
 
 ## Sonraki Ders
 3. Ders'te Unity Arayüzünü detaylı inceleyeceğiz ve ilk sahnemizi oluşturacağız.
+
