@@ -290,3 +290,4 @@ Bu derste öğrendiklerimiz:
 ## Sonraki Ders
 
 4. Ders'te GameObject ve Component kavramlarını derinlemesine inceleyeceğiz. Rigidbody, Collider gibi fizik bileşenlerini öğreneceğiz ve nesnelere hareket kazandıracağız.
+
