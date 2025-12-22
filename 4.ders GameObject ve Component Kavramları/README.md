@@ -485,3 +485,4 @@ Bu derste öğrendiklerimiz:
 ## Sonraki Ders
 
 5. Ders'te C# Scripting Temellerini öğreneceğiz. Değişkenler, fonksiyonlar, MonoBehaviour yaşam döngüsü ve temel oyun mantığı kodlamayı işleyeceğiz.
+
