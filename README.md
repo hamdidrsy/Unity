@@ -23,3 +23,4 @@ Katkılarınızı bekliyorum! Pull request'ler ve öneriler için teşekkürler.
 ## Lisans
 
 Bu proje eğitim amaçlıdır.
+
