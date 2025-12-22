@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unity Öğreniyorum - İlerleme Takibi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #a435f0 0%, #8710d8 100%);
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(164, 53, 240, 0.3);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .course-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(164, 53, 240, 0.2);
+        }
+
+        .info-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .info-card h3 {
+            color: #a435f0;
+            margin-bottom: 10px;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.03);
+            margin-bottom: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .section-header {
+            background: linear-gradient(90deg, rgba(164, 53, 240, 0.2) 0%, rgba(135, 16, 216, 0.1) 100%);
+            padding: 20px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .section-header:hover {
+            background: linear-gradient(90deg, rgba(164, 53, 240, 0.3) 0%, rgba(135, 16, 216, 0.2) 100%);
+        }
+
+        .section-header h2 {
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-number {
+            background: #a435f0;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .lesson-count {
+            background: rgba(164, 53, 240, 0.3);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .section-content {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s;
+        }
+
+        .section.active .section-content {
+            max-height: 2000px;
+            padding: 20px 25px;
+        }
+
+        .lesson {
+            padding: 12px 15px;
+            margin: 8px 0;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 3px solid #a435f0;
+            transition: background 0.2s;
+        }
+
+        .lesson:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .lesson-icon {
+            color: #a435f0;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .feature h3 {
+            color: #a435f0;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(90deg, #a435f0 0%, #8710d8 100%);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(164, 53, 240, 0.4);
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .stars {
+            color: #f4c150;
+            font-size: 1.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer a {
+            color: #a435f0;
+            text-decoration: none;
+        }
+
+        .arrow {
+            transition: transform 0.3s;
+        }
+
+        .section.active .arrow {
+            transform: rotate(180deg);
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 Unity Öğreniyorum - İlerleme Takibi</h1>
+            <p>Kişisel Unity Öğrenme Müfredatı</p>
+            <div class="rating">
+                <span class="stars">📊</span>
+                <span>Genel İlerleme: %25</span>
+            </div>
+        </header>
+
+        <div class="course-info">
+            <div class="info-card">
+                <div class="icon">✅</div>
+                <h3>5 Ders</h3>
+                <p>Tamamlandı</p>
+            </div>
+            <div class="info-card">
+                <div class="icon">📚</div>
+                <h3>20 Bölüm</h3>
+                <p>Toplam Müfredat</p>
+            </div>
+            <div class="info-card">
+                <div class="icon">🎯</div>
+                <h3>5/20</h3>
+                <p>Bölüm İlerlemesi</p>
+            </div>
+            <div class="info-card">
+                <div class="icon">🚀</div>
+                <h3>Sıradaki</h3>
+                <p>Input Sistemi</p>
+            </div>
+        </div>
+
+        <h2 style="text-align: center; margin: 40px 0 30px; font-size: 2rem;">📋 Kurs Müfredatı</h2>
+
+        <!-- Bölüm 1 - TAMAMLANDI -->
+        <div class="section completed">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number" style="background: #27ae60;">✓</span> Giriş ve Unity Kurulumu <span style="color: #27ae60; font-size: 0.8em;">(%100)</span></h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> Unity Nedir? Oyun Motoru Kavramı <small>(1. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> Unity Hub Kurulumu <small>(1. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> Unity Editor Kurulumu <small>(1. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> İlk Projenizi Oluşturma <small>(3. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> Unity Arayüzü Tanıtımı <small>(2. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> Scene ve Game View <small>(3. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> Hierarchy ve Inspector Panelleri <small>(3. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> Project ve Console Panelleri <small>(3. Ders)</small></div>
+            </div>
+        </div>
+
+        <!-- Bölüm 2 - %70 TAMAMLANDI -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number" style="background: #f39c12;">2</span> C# Programlama Temelleri <span style="color: #f39c12; font-size: 0.8em;">(%70)</span></h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> C# Nedir? Visual Studio Kurulumu <small>(2. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> Değişkenler ve Veri Tipleri <small>(5. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> Operatörler (Aritmetik, Karşılaştırma, Mantıksal) <small>(5. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> Koşul İfadeleri (if-else, switch-case) <small>(5. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> Döngüler (for, while, foreach) <small>(5. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> Diziler ve Listeler <small>(5. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> Fonksiyonlar ve Metodlar <small>(5. Ders)</small></div>
+                <div class="lesson"><span class="lesson-icon">⬜</span> Sınıflar ve Nesneler (OOP)</div>
+                <div class="lesson"><span class="lesson-icon">⬜</span> Kalıtım ve Çok Biçimlilik</div>
+                <div class="lesson"><span class="lesson-icon">⬜</span> Interface ve Abstract Sınıflar</div>
+            </div>
+        </div>
+
+        <!-- Bölüm 3 - %90 TAMAMLANDI -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number" style="background: #27ae60;">3</span> Unity Temel Kavramlar <span style="color: #27ae60; font-size: 0.8em;">(%90)</span></h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> GameObject ve Component Sistemi <small>(4. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> Transform Component (Position, Rotation, Scale) <small>(4. Ders)</small></div>
+                <div class="lesson"><span class="lesson-icon">⬜</span> Prefab Sistemi</div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> Tag ve Layer Kullanımı <small>(4. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> 3D Temel Objeler (Cube, Sphere, Capsule, Cylinder) <small>(3. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> Material ve Shader Temelleri <small>(3. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> Aydınlatma (Lights) Sistemi <small>(3. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> Kamera Ayarları <small>(3. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> Asset Store Kullanımı <small>(2. Ders)</small></div>
+            </div>
+        </div>
+
+        <!-- Bölüm 4 - %55 TAMAMLANDI -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number" style="background: #f39c12;">4</span> Unity Scripting <span style="color: #f39c12; font-size: 0.8em;">(%55)</span></h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> MonoBehaviour Sınıfı <small>(5. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> Start() ve Update() Metodları <small>(5. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> FixedUpdate ve LateUpdate <small>(5. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> Awake() ve OnEnable() <small>(5. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> GetComponent ve FindObject <small>(4. Ders)</small></div>
+                <div class="lesson"><span class="lesson-icon">⬜</span> Instantiate ve Destroy</div>
+                <div class="lesson"><span class="lesson-icon">⬜</span> Coroutines (IEnumerator)</div>
+                <div class="lesson"><span class="lesson-icon">⬜</span> Events ve Delegates</div>
+                <div class="lesson"><span class="lesson-icon">⬜</span> ScriptableObjects</div>
+            </div>
+        </div>
+
+        <!-- Bölüm 5 - %75 TAMAMLANDI -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number" style="background: #f39c12;">5</span> Fizik Sistemi <span style="color: #f39c12; font-size: 0.8em;">(%75)</span></h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> Rigidbody Component <small>(4. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> Collider Türleri (Box, Sphere, Capsule, Mesh) <small>(4. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> Trigger ve Collision Farkı <small>(4. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> OnCollisionEnter, Stay, Exit <small>(4. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> OnTriggerEnter, Stay, Exit <small>(4. Ders)</small></div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> Physics Material (Sürtünme, Sekme) <small>(4. Ders)</small></div>
+                <div class="lesson"><span class="lesson-icon">⬜</span> Raycast Kullanımı</div>
+                <div class="lesson" style="border-left-color: #27ae60;"><span class="lesson-icon">✅</span> AddForce ve Velocity <small>(4. Ders)</small></div>
+                <div class="lesson"><span class="lesson-icon">⬜</span> Joint Sistemleri</div>
+            </div>
+        </div>
+
+        <!-- Bölüm 6 -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">6</span> Kullanıcı Girişi (Input)</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="lesson"><span class="lesson-icon">📹</span> Input System Temelleri</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Klavye Girişi (GetKey, GetKeyDown, GetKeyUp)</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Fare Girişi (Mouse Position, Click)</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Axis Input (Horizontal, Vertical)</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> New Input System</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Mobil Touch Input</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Touch Phase ve Position</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Accelerometer (İvme Sensörü)</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Joystick Oluşturma</div>
+            </div>
+        </div>
+
+        <!-- Bölüm 7 -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">7</span> Animasyon Sistemi</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="lesson"><span class="lesson-icon">📹</span> Animation Window</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Animator Controller</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Animation States</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Transitions ve Conditions</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Animation Parameters</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Blend Trees</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Animation Layers</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Animation Events</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Root Motion</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Mecanim ile Karakter Animasyonu</div>
+            </div>
+        </div>
+
+        <!-- Bölüm 8 -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">8</span> UI (Kullanıcı Arayüzü)</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="lesson"><span class="lesson-icon">📹</span> Canvas Sistemi</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Rect Transform</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Anchor ve Pivot</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Text ve TextMeshPro</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Image ve RawImage</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Button ve Event Trigger</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Slider ve Progress Bar</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> InputField</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Scroll View</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Panel ve Layout Groups</div>
+            </div>
+        </div>
+
+        <!-- Bölüm 9 -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">9</span> Ses Sistemi (Audio)</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="lesson"><span class="lesson-icon">📹</span> Audio Source Component</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Audio Listener</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> AudioClip Kullanımı</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> 3D Sound Settings</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Audio Mixer</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Müzik ve Efekt Yönetimi</div>
+            </div>
+        </div>
+
+        <!-- Bölüm 10 -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">10</span> Parçacık Sistemi (Particle System)</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="lesson"><span class="lesson-icon">📹</span> Particle System Temelleri</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Emission ve Shape Modülleri</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Color over Lifetime</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Size over Lifetime</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Velocity over Lifetime</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Collision Modülü</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Sub Emitters</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Patlama, Ateş, Duman Efektleri</div>
+            </div>
+        </div>
+
+        <!-- Bölüm 11 -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">11</span> Sahne Yönetimi</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="lesson"><span class="lesson-icon">📹</span> Scene Manager</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Sahne Geçişleri (LoadScene)</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Async Scene Loading</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> DontDestroyOnLoad</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Loading Screen Oluşturma</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Build Settings</div>
+            </div>
+        </div>
+
+        <!-- Bölüm 12 -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">12</span> Veri Kaydetme</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="lesson"><span class="lesson-icon">📹</span> PlayerPrefs Kullanımı</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> JSON ile Veri Kaydetme</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Binary Serialization</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> XML ile Veri Yönetimi</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Save/Load Sistemi Oluşturma</div>
+            </div>
+        </div>
+
+        <!-- Bölüm 13 -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">13</span> 2D Oyun Geliştirme</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="lesson"><span class="lesson-icon">📹</span> 2D Proje Ayarları</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Sprite ve Sprite Renderer</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Sprite Editor ve Slicing</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> 2D Colliders (Box, Circle, Polygon)</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Rigidbody2D</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> 2D Physics</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Tilemap Sistemi</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> 2D Animation</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Parallax Scrolling</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> 2D Karakter Kontrolü</div>
+            </div>
+        </div>
+
+        <!-- Bölüm 14 -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">14</span> 3D Oyun Geliştirme</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="lesson"><span class="lesson-icon">📹</span> 3D Karakter Kontrolü</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Character Controller</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> First Person Controller (FPS)</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Third Person Controller</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Kamera Takip Sistemleri</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Cinemachine Kullanımı</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Terrain (Arazi) Oluşturma</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Skybox ve Environment</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> NavMesh ve AI Navigation</div>
+            </div>
+        </div>
+
+        <!-- Bölüm 15 -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">15</span> Yapay Zeka (AI)</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="lesson"><span class="lesson-icon">📹</span> NavMesh Agent</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> NavMesh Obstacle</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Off-Mesh Links</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Pathfinding Algoritmaları</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> State Machine ile AI</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Düşman AI Davranışları</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Patrol ve Chase Sistemleri</div>
+            </div>
+        </div>
+
+        <!-- Bölüm 16 -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">16</span> Mobil Oyun Geliştirme</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="lesson"><span class="lesson-icon">📹</span> Mobil Platform Ayarları</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Android Build Settings</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> iOS Build Settings</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Touch Kontrolleri</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Virtual Joystick</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Accelerometer Kullanımı</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Mobil Optimizasyon</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Responsive UI</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Cihaz Kamerası Kullanımı</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Vibration (Titreşim)</div>
+            </div>
+        </div>
+
+        <!-- Bölüm 17 -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">17</span> Optimizasyon</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="lesson"><span class="lesson-icon">📹</span> Profiler Kullanımı</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Draw Call Optimizasyonu</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Object Pooling</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> LOD (Level of Detail)</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Occlusion Culling</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Texture Atlasing</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Script Optimizasyonu</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Memory Yönetimi</div>
+            </div>
+        </div>
+
+        <!-- Bölüm 18 -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">18</span> Multiplayer Temelleri</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="lesson"><span class="lesson-icon">📹</span> Networking Kavramları</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Unity Netcode</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Photon PUN Kurulumu</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Room ve Lobby Sistemi</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> RPC (Remote Procedure Call)</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Synchronization</div>
+            </div>
+        </div>
+
+        <!-- Bölüm 19 -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">19</span> Örnek Oyun Projeleri</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="lesson"><span class="lesson-icon">🎮</span> 2D Platform Oyunu</div>
+                <div class="lesson"><span class="lesson-icon">🎮</span> Endless Runner Oyunu</div>
+                <div class="lesson"><span class="lesson-icon">🎮</span> Top Down Shooter</div>
+                <div class="lesson"><span class="lesson-icon">🎮</span> FPS Oyunu</div>
+                <div class="lesson"><span class="lesson-icon">🎮</span> Racing (Yarış) Oyunu</div>
+                <div class="lesson"><span class="lesson-icon">🎮</span> Puzzle Oyunu</div>
+                <div class="lesson"><span class="lesson-icon">🎮</span> RPG Temelleri</div>
+                <div class="lesson"><span class="lesson-icon">🎮</span> Hyper Casual Oyunlar</div>
+            </div>
+        </div>
+
+        <!-- Bölüm 20 -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">20</span> Yayınlama (Publishing)</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="lesson"><span class="lesson-icon">📹</span> Build Ayarları</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Android APK Oluşturma</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Google Play Store Yayınlama</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> iOS Build ve App Store</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> PC Build (Windows, Mac, Linux)</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> WebGL Build</div>
+                <div class="lesson"><span class="lesson-icon">📹</span> Monetization (Reklam, In-App Purchase)</div>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <h3>✅ Tamamlanan Dersler</h3>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin: 10px 0;">✅ 1. Ders - Unity Nedir ve Kurulumu Adımları</li>
+                    <li style="margin: 10px 0;">✅ 2. Ders - Unity ile Bilinmesi Gerekenler</li>
+                    <li style="margin: 10px 0;">✅ 3. Ders - Unity Arayüzü Detaylı İnceleme ve İlk Sahne</li>
+                    <li style="margin: 10px 0;">✅ 4. Ders - GameObject ve Component Kavramları</li>
+                    <li style="margin: 10px 0;">✅ 5. Ders - C# Scripting Temelleri</li>
+                </ul>
+            </div>
+            <div class="feature">
+                <h3>🎯 Sıradaki Konular</h3>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin: 10px 0;">🔜 Input Sistemi ve Karakter Kontrolü</li>
+                    <li style="margin: 10px 0;">🔜 Prefab Sistemi</li>
+                    <li style="margin: 10px 0;">🔜 Instantiate ve Destroy</li>
+                    <li style="margin: 10px 0;">🔜 Coroutines (IEnumerator)</li>
+                    <li style="margin: 10px 0;">🔜 OOP Kavramları (Sınıflar, Kalıtım)</li>
+                    <li style="margin: 10px 0;">🔜 Raycast Kullanımı</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 50px 0;">
+            <a href="https://github.com/hamdidrsy/Unity" class="cta-button" target="_blank">
+                📂 GitHub Reposuna Git
+            </a>
+        </div>
+
+        <footer>
+            <p>Bu sayfa kişisel Unity öğrenme sürecini takip etmek için hazırlanmıştır.</p>
+            <p>GitHub: <a href="https://github.com/hamdidrsy/Unity" target="_blank">github.com/hamdidrsy/Unity</a></p>
+            <p style="margin-top: 20px; opacity: 0.7;">© 2024 - Unity Öğreniyorum</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleSection(header) {
+            const section = header.parentElement;
+            section.classList.toggle('active');
+        }
+
+        // İlk bölümü varsayılan olarak aç
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.section').classList.add('active');
+        });
+    </script>
+</body>
+</html>
