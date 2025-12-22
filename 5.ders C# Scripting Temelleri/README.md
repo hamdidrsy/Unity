@@ -821,3 +821,4 @@ Bu derste öğrendiklerimiz:
 ## Sonraki Ders
 
 6. Ders'te Input Sistemi ve Karakter Kontrolü konularını işleyeceğiz. Yeni Input System, karakter hareketi, kamera kontrolü ve temel oynanış mekanikleri üzerinde çalışacağız.
+
